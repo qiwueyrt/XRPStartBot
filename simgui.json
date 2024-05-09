@@ -1,0 +1,57 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "BuiltInAccel": {
+        "header": {
+          "open": true
+        }
+      },
+      "XRPGyro": {
+        "header": {
+          "open": true
+        }
+      },
+      "motorL": {
+        "header": {
+          "open": true
+        }
+      },
+      "motorR": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/SendableChooser[0]": "String Chooser"
+    }
+  },
+  "NetworkTables": {
+    "Persistent Values": {
+      "open": false
+    },
+    "transitory": {
+      "Shuffleboard": {
+        "open": true
+      },
+      "SmartDashboard": {
+        "SendableChooser[0]": {
+          "open": true
+        },
+        "open": true
+      }
+    }
+  },
+  "NetworkTables Info": {
+    "Clients": {
+      "open": true
+    },
+    "Connections": {
+      "open": true
+    },
+    "visible": true
+  }
+}
