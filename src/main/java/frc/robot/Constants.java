@@ -25,5 +25,8 @@ public final class Constants {
     public static final double kTurnD=0.0;
     public static final double kTurnToleranceDeg=1.0;
     public static final double kTurnRateToleranceDegPerS=10.0;
+    public static final double kUltrasonicP = 0;
+    public static final double kUltrasonicI = 0;
+    public static final double kUltrasonicD = 0;
   }
 }

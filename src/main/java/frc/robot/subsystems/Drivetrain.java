@@ -4,7 +4,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.filter.MedianFilter;
 import edu.wpi.first.util.sendable.SendableRegistry;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -28,6 +31,13 @@ public class Drivetrain extends SubsystemBase {
   // to use DIO pins 4/5 and 6/7 for the left and right
   private final Encoder m_leftEncoder = new Encoder(4, 5);
   private final Encoder m_rightEncoder = new Encoder(6, 7);
+
+    
+  private final AnalogInput input;
+  private final AnalogPotentiometer m_ultrasonic;
+  // Ultrasonic sensors tend to be quite noisy and susceptible to sudden outliers,
+  // so measurements are filtered with a 5-sample median filter
+  private final MedianFilter m_filter = new MedianFilter(5);
 
   // Set up the differential drive controller
   private final DifferentialDrive m_diffDrive =
@@ -53,11 +63,26 @@ public class Drivetrain extends SubsystemBase {
     m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     m_rightEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     resetEncoders();
+    
+    // Initializes an AnalogInput on port 2 and enables 2-bit averaging
+    input = new AnalogInput(2);
+    input.setAverageBits(2);
+    // Initializes an AnalogPotentiometer with the given AnalogInput
+    // The full range of motion (in meaningful external units) is 20-4000 (this could be degrees, for instance)
+    // The "starting point" of the motion, i.e. where the mechanism is located when the potentiometer reads 0v, is 20.
+    m_ultrasonic = new AnalogPotentiometer(input, 4000, 20);
+
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
     m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
+  public double getUltrasonicSensor(){
+    double measurement = m_ultrasonic.get();
+    double filteredMeasurement = m_filter.calculate(measurement);
+    return filteredMeasurement;
+  }
+
 
   public void resetEncoders() {
     m_leftEncoder.reset();

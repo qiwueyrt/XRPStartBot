@@ -1,5 +1,10 @@
 {
   "HALProvider": {
+    "Analog Inputs": {
+      "window": {
+        "visible": true
+      }
+    },
     "Other Devices": {
       "BuiltInAccel": {
         "header": {
@@ -20,6 +25,11 @@
         "header": {
           "open": true
         }
+      },
+      "servo1": {
+        "header": {
+          "open": true
+        }
       }
     }
   },
@@ -30,8 +40,16 @@
     }
   },
   "NetworkTables": {
-    "Persistent Values": {
+    "Retained Values": {
       "open": false
+    },
+    "Transitory Values": {
+      "open": false
+    },
+    "retained": {
+      "SmartDashboard": {
+        "open": true
+      }
     },
     "transitory": {
       "Shuffleboard": {
@@ -46,11 +64,16 @@
     }
   },
   "NetworkTables Info": {
-    "Clients": {
-      "open": true
-    },
     "Connections": {
       "open": true
+    },
+    "Server": {
+      "Publishers": {
+        "open": true
+      },
+      "Subscribers": {
+        "open": true
+      }
     },
     "visible": true
   }
